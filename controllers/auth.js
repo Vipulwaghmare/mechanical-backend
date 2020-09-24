@@ -1,10 +1,8 @@
 const User = require("../models/user");
-
-exports.signin = (req, res) => {
-    const {email, password } = req.body;
-}
+var jwt = require('jsonwebtoken');
 
 exports.signup = (req, res) => {
+    console.log("backend signup")
     const user = new User(req.body)
     user.save((error, user)=> {
         if(error){
@@ -20,6 +18,34 @@ exports.signup = (req, res) => {
     })
 }
 
+exports.signin = (req, res) => {
+    console.log("backend signin")
+    const {email, password } = req.body;
+    User.findOne({email},(error,user)=>{
+        if(error || !user){
+            return res.status(400).json({
+                error: "User email is not registered"
+            })
+        }
+        // user is coming from database
+        const {_id, email} = user;
+        if(user.password !== password){   
+            return res.status(400).json({
+                error: "Password doesn't match"
+            })
+        } else {
+            const token = jwt.sign({foo: 'bar'}, process.env.JWTSECRET)
+            return res.json({
+                token, user: {_id, email}
+            })
+        }
+    })
+}
+
+
 exports.signout = (req, res) => {
-    console.log("signout")
+    res.clearCookie('token');
+    res.json({
+        message: "user signout is succesful"
+    })
 }
