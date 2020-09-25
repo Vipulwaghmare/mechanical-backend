@@ -5,11 +5,13 @@ const subjectSchema = new Schema({
     name: {
         type: String,
         required: true,
+        unique: true,
     },
     shortName: {
         type: String,
         required: true,
-        maxlength: 5
+        maxlength: 5,
+        unique: true,
     },
     subtopics: {
         type: Array,

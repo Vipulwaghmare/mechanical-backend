@@ -10,6 +10,7 @@ const mongoose = require("mongoose");
 // Importing Routes
 const authRoutes = require("./routes/auth")
 const subjectRoutes = require('./routes/subject')
+const userRoutes = require('./routes/user')
 
 // Connecting to the database
 mongoose.connect(process.env.DATABASE,{
@@ -27,6 +28,7 @@ app.use(bodyParser.json())
 // Routes
 app.use('/', authRoutes);
 app.use('/', subjectRoutes)
+app.use('/', userRoutes)
 
 // setting up port and running
 const port = 1000

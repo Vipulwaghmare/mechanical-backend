@@ -21,7 +21,6 @@ exports.removeSubject = (req, res ) => {
 
 exports.getAllSubjects = (req, res) => {
     Subject.find()
-       .select("name")
        .exec((error,subjects)=>{
            if(error|| !subjects){
                return res.status(400).json({
