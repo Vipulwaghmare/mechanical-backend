@@ -11,14 +11,33 @@ const mongoose = require("mongoose");
 const authRoutes = require("./routes/auth")
 const subjectRoutes = require('./routes/subject')
 const userRoutes = require('./routes/user')
+const gateRoutes = require('./routes/gate')
+const eseRoutes = require('./routes/ese')
 
-// Connecting to the database
-mongoose.connect(process.env.DATABASE,{
+// Connecting to the local database
+
+// mongoose.connect(process.env.DATABASE,{
+//     useNewUrlParser: true,
+//     useUnifiedTopology: true,
+// })
+//     .then(()=> console.log("Database connected"))
+//     .catch(()=> console.log("Database connection Error"))
+
+// Online mongodb collection
+
+// const MongoClient = require('mongodb').MongoClient;
+const uri = process.env.ONLINEDATABASE;
+// const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
+// client.connect(err => {
+//   const collection = client.db("test").collection("devices");
+//   // perform actions on the collection object
+//   client.close();
+// })
+mongoose.connect(uri, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
-})
-    .then(()=> console.log("Database connected"))
-    .catch(()=> console.log("Database connection Error"))
+}).then(()=> console.log("ONLINE DATABASE CONNECTED"))
+    .catch(err => "ONLINE DATABASE CONNECTION ERROR")
 
 // important middleware
 app.use(cors())
@@ -29,6 +48,8 @@ app.use(bodyParser.json())
 app.use('/', authRoutes);
 app.use('/', subjectRoutes)
 app.use('/', userRoutes)
+app.use('/', gateRoutes)
+app.use('/', eseRoutes)
 
 // setting up port and running
 const port = 1000
