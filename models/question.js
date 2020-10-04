@@ -46,7 +46,7 @@ const questionSchema = new Schema ({
     },
     answerPhoto : {
         type: Buffer,
-        required: true,
+        required: false,
     },
 })
 

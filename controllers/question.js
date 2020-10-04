@@ -4,15 +4,14 @@ const _ = require('lodash')
 const fs = require("fs")
 
 exports.addQuestion = (req, res ) => {
-    console.log("here")
-    let form = new formidable.IncomingForm();
+    const form = new formidable.IncomingForm()
     form.keepExtensions = true;
-
-    form.parse(req, (err, fields, file)=> {
-        if(err){
-            return res.status(400).json({
-                error: "Problem with image"
-            })
+    
+    form.parse(req, (err, fields, file) => {
+        if (err) {
+                return res.status(400).json({
+                error: "problem with image"
+            });
         }
     // destructuring fields
     const { question, gateYears, eseYears, a, b, c, d, correct_option, ans } = fields
@@ -47,7 +46,7 @@ exports.addQuestion = (req, res ) => {
     }
     // saving in DB
     quest.save((error, question)=> {
-        if(err){
+        if(error){
             res.status(400).json({
                 error: "Saving question in DB failed"
             })
