@@ -13,9 +13,15 @@ exports.addQuestion = (req, res ) => {
                 error: "problem with image"
             });
         }
+        // converting incoming string to array
+        let gateYearsArray = fields.gateYears.split(',')
+        let eseYearsArray = fields.eseYears.split(',')
+
+        // storing array to string
+        fields.gateYears = gateYearsArray
+        fields.eseYears = eseYearsArray
     // destructuring fields
     const { question, gateYears, eseYears, a, b, c, d, correct_option, ans } = fields
-    
     if(!question || !a || !b || !c || !d || !correct_option || !ans){
         return res.status(400).json({
             error: "Include all the fields"

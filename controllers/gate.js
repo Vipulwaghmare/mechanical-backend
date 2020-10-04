@@ -1,4 +1,5 @@
 const Gate = require('../models/gate')
+const Question = require('../models/question')
 
 exports.addGate = (req, res) => {
     let gate = new Gate(req.body)
@@ -22,4 +23,11 @@ exports.getYears = (req, res ) => {
             }
             res.json(gate)
         })
+}
+
+exports.getGatePaper = (req, res) => {
+    console.log("here")
+    return res.json({
+        xd: "ds"
+    })
 }
