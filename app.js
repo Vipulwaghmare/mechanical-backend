@@ -13,6 +13,7 @@ const subjectRoutes = require('./routes/subject')
 const userRoutes = require('./routes/user')
 const gateRoutes = require('./routes/gate')
 const eseRoutes = require('./routes/ese')
+const questionRoutes = require('./routes/question')
 
 // Connecting to the local database
 
@@ -36,6 +37,7 @@ const uri = process.env.ONLINEDATABASE;
 mongoose.connect(uri, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
+    useCreateIndex: true,
 }).then(()=> console.log("ONLINE DATABASE CONNECTED"))
     .catch(err => "ONLINE DATABASE CONNECTION ERROR")
 
@@ -50,6 +52,7 @@ app.use('/', subjectRoutes)
 app.use('/', userRoutes)
 app.use('/', gateRoutes)
 app.use('/', eseRoutes)
+app.use('/', questionRoutes)
 
 // setting up port and running
 const port = 1000

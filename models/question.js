@@ -9,26 +9,39 @@ const questionSchema = new Schema ({
     },
     photo: {
         type: Buffer,
+        contentType: String,
         required: false,
     },
+    gateYears: {
+        type: Array,
+        required: false
+    },
+    eseYears: {
+        type: Array,
+        required: false
+    },
     a: {
-        type: Text,
+        type: String,
         required: true,
     },
     b: {
-        type: Text,
+        type: String,
         required: true,
     },
     c: {
-        type: Text,
+        type: String,
         required: true,
     },
     d: {
-        type: Text,
+        type: String,
         required: true,
     },
+    correct_option:{
+        type: String,
+        required: true
+    },
     ans: {
-        type: Text,
+        type: String,
         required: true,
     },
     answerPhoto : {
@@ -36,3 +49,5 @@ const questionSchema = new Schema ({
         required: true,
     },
 })
+
+module.exports = mongoose.model("Question", questionSchema)
